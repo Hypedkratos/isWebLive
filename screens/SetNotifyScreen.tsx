@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {useRoute} from '@react-navigation/native';
+import {API_BASE_URL} from '@env';
 
 const SetNotifyScreen: React.FC = () => {
   const {params} = useRoute();
@@ -32,14 +33,11 @@ const SetNotifyScreen: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        'https://web-production-1e543.up.railway.app/monitor',
-        {
-          url,
-          phone_number: phoneNumber,
-          duration: durationInHours,
-        },
-      );
+      const response = await axios.post(`${API_BASE_URL}/monitor`, {
+        url,
+        phone_number: phoneNumber,
+        duration: durationInHours,
+      });
       if (response.status === 200) {
         Alert.alert('Success', 'Monitoring started!');
         setIsMonitoring(true);
@@ -51,12 +49,9 @@ const SetNotifyScreen: React.FC = () => {
 
   const handleStopMonitoring = async () => {
     try {
-      const response = await axios.post(
-        'https://web-production-1e543.up.railway.app/stop_monitoring',
-        {
-          phone_number: phoneNumber,
-        },
-      );
+      const response = await axios.post(`${API_BASE_URL}/stop_monitoring`, {
+        phone_number: phoneNumber,
+      });
       if (response.status === 200) {
         setIsMonitoring(false);
         Alert.alert('Success', 'Monitoring stopped!');
