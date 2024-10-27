@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 const InfoScreen: React.FC = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Icon
           name="arrow-back-ios"
@@ -44,7 +44,7 @@ const InfoScreen: React.FC = () => {
         </Text>
         <Text style={styles.normal}>7. Stop monitoring if you want.</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -61,16 +61,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 17,
+    paddingHorizontal: 23,
+    paddingVertical: 30,
   },
   screenname: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: '800',
   },
   infoitems: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     paddingVertical: 4,
     display: 'flex',
     flexDirection: 'column',
@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
   },
   bold: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 24,
     paddingBottom: 8,
     fontWeight: '500',
   },
   normal: {
-    fontSize: 14,
+    fontSize: 18,
     color: 'black',
     fontWeight: '400',
   },
