@@ -9,7 +9,7 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('HomeScreen' as never);
-    }, 2500);
+    }, 3000);
   }, [navigation]);
   return (
     <KeyboardAvoidingView style={styles.maincontainer}>
