@@ -32,11 +32,14 @@ const SetNotifyScreen: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://192.168.25.183:5000/monitor', {
-        url,
-        phone_number: phoneNumber,
-        duration: durationInHours,
-      });
+      const response = await axios.post(
+        'https://web-production-1e543.up.railway.app/monitor',
+        {
+          url,
+          phone_number: phoneNumber,
+          duration: durationInHours,
+        },
+      );
       if (response.status === 200) {
         Alert.alert('Success', 'Monitoring started!');
         setIsMonitoring(true);
@@ -49,7 +52,7 @@ const SetNotifyScreen: React.FC = () => {
   const handleStopMonitoring = async () => {
     try {
       const response = await axios.post(
-        'http://192.168.25.183:5000/stop_monitoring',
+        'https://web-production-1e543.up.railway.app/stop_monitoring',
         {
           phone_number: phoneNumber,
         },
