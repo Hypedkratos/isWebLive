@@ -38,6 +38,7 @@ const HomeScreen = () => {
       formattedUrl = `https://${url}`;
       setFormattedURLdata(formattedUrl);
     }
+    setFormattedURLdata(formattedUrl);
 
     try {
       setLoading(true);
