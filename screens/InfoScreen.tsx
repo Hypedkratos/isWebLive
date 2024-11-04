@@ -43,6 +43,10 @@ const InfoScreen: React.FC = () => {
           duration, you'll be notified via SMS and whatsapp message.
         </Text>
         <Text style={styles.normal}>7. Stop monitoring if you want.</Text>
+        <Text style={styles.normal}>
+          8. If the website runs on http, specify 'http://'.
+        </Text>
+        <Text style={styles.normal}>8. Thank you for using IsWebLive ❤️.</Text>
       </View>
     </ScrollView>
   );

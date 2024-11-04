@@ -60,7 +60,7 @@ react {
 }
 // for font management
 project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf', 'Entypo.ttf' ] // Add other font files here if needed
+    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf', 'Entypo.ttf', 'Ionicons.ttf' ] // Add other font files here if needed
 ]
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 

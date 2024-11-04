@@ -10,8 +10,11 @@ import {
 import axios from 'axios';
 import {useRoute} from '@react-navigation/native';
 import {API_BASE_URL} from '@env';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
 const SetNotifyScreen: React.FC = () => {
+  const navigation = useNavigation();
   const {params} = useRoute();
   const url = params?.data;
 
@@ -22,7 +25,7 @@ const SetNotifyScreen: React.FC = () => {
   const handleSubmit = async () => {
     const durationInHours = parseInt(duration, 10);
 
-    // Validate input
+    // input validation
     if (!phoneNumber || !duration) {
       Alert.alert('Error', 'Please fill out all fields.');
       return;
@@ -32,10 +35,13 @@ const SetNotifyScreen: React.FC = () => {
       return;
     }
 
+    // formatting number
+    const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+
     try {
       const response = await axios.post(`${API_BASE_URL}/monitor`, {
         url,
-        phone_number: phoneNumber,
+        phone_number: formattedPhoneNumber,
         duration: durationInHours,
       });
       if (response.status === 200) {
@@ -45,6 +51,13 @@ const SetNotifyScreen: React.FC = () => {
     } catch (error) {
       Alert.alert('Error', 'Something went wrong. Please try again.');
     }
+  };
+
+  const formatPhoneNumber = (number: string) => {
+    if (!number.startsWith('+91')) {
+      return `+91${number.replace(/\s+/g, '').trim()}`;
+    }
+    return number.replace(/\s+/g, '').trim();
   };
 
   const handleStopMonitoring = async () => {
@@ -63,6 +76,19 @@ const SetNotifyScreen: React.FC = () => {
 
   return (
     <View style={styles.main}>
+      {!isMonitoring && (
+        <View style={styles.back}>
+          <Icon
+            name="chevron-back"
+            size={20}
+            color={'#fff'}
+            onPress={() => navigation.goBack()}
+          />
+          <Text style={{fontSize: 18}} onPress={() => navigation.goBack()}>
+            Back
+          </Text>
+        </View>
+      )}
       <Text style={styles.url}>URL: {url}</Text>
 
       <TextInput
@@ -101,6 +127,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#90e0ef',
+    position: 'relative',
   },
   url: {
     paddingBottom: 18,
@@ -127,5 +154,14 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
+  },
+  back: {
+    position: 'absolute',
+    top: 18,
+    left: 25,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
 });
